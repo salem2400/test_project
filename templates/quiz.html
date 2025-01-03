@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1>Quiz</h1>
+        <div class="quiz-progress">
+            <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+            </div>
+            <div class="progress-text">Question 1 of {{ questions|length }}</div>
+        </div>
+        <div class="timer">
+            <span class="timer-icon">⏱️</span>
+            <span id="timer">05:00</span>
+        </div>
+    </div>
+
+    <form id="quiz-form" method="POST" action="{{ url_for('routes.submit_quiz') }}">
+        <div id="questions-container">
+            {% for question in questions %}
+            <div class="question-card" id="question-{{ loop.index }}" {% if loop.index != 1 %}style="display: none;"{% endif %}>
+                <div class="question-number">Question {{ loop.index }}</div>
+                <div class="question-text">{{ question.text }}</div>
+                <div class="options">
+                    {% for option in question.options %}
+                    <label class="option">
+                        <input type="radio" name="question-{{ question.id }}" value="{{ option }}" onclick="handleOptionClick(this)">
+                        <span class="option-text">{{ option }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="quiz-navigation">
+            <button type="button" id="prev-btn" class="btn btn-prev" disabled>Previous</button>
+            <button type="button" id="next-btn" class="btn btn-next">Next</button>
+            <button type="submit" id="submit-btn" class="btn btn-submit" style="display: none;">Submit Quiz</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    let currentQuestion = 1;
+    const totalQuestions = document.querySelectorAll('.question-card').length;
+    const startTime = Date.now() / 1000;
+    let progressBar, progressText; // Declare progress elements globally
+
+    function showQuestion(questionNumber) {
+        // Hide all questions
+        document.querySelectorAll('.question-card').forEach(q => {
+            q.style.display = 'none';
+        });
+        
+        // Show current question
+        const questionElement = document.getElementById(`question-${questionNumber}`);
+        questionElement.style.display = 'block';
+        
+        // Smooth scroll to the question
+        if (questionElement) {
+            questionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Update progress text
+        progressText.textContent = `Question ${questionNumber} of ${totalQuestions}`;
+        
+        // Handle navigation buttons visibility
+        const navButtons = document.querySelector('.quiz-navigation');
+        if (totalQuestions === 1) {
+            navButtons.style.display = 'none';
+        } else {
+            navButtons.style.display = 'flex';
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = (questionNumber === 1);
+            document.getElementById('next-btn').disabled = (questionNumber === totalQuestions);
+        }
+        
+        // Update submit button
+        document.getElementById('submit-btn').style.display = 
+            (questionNumber === totalQuestions) ? 'inline-block' : 'none';
+    }
+
+    function handleOptionClick(radio) {
+        // Uncheck if clicking the same option
+        if (radio.checked) {
+            const questionName = radio.name;
+            const allOptions = document.querySelectorAll(`input[name="${questionName}"]`);
+            
+            // Check if this option was already selected
+            if (radio.dataset.clicked === 'true') {
+                radio.checked = false;
+                radio.dataset.clicked = 'false';
+            } else {
+                // Uncheck other options
+                allOptions.forEach(opt => {
+                    if (opt !== radio) {
+                        opt.checked = false;
+                        opt.dataset.clicked = 'false';
+                    }
+                });
+                radio.dataset.clicked = 'true';
+            }
+        }
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < totalQuestions) {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+            updateProgress();
+            // Save the current question state
+            sessionStorage.setItem('currentQuestion', currentQuestion);
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQuestion > 1) {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+            updateProgress();
+            // Save the current question state
+            sessionStorage.setItem('currentQuestion', currentQuestion);
+        }
+    }
+
+    // Initialize current question from session storage
+    const savedQuestion = sessionStorage.getItem('currentQuestion');
+    if (savedQuestion) {
+        currentQuestion = parseInt(savedQuestion);
+    }
+
+    function updateProgress() {
+        const progress = ((currentQuestion) / totalQuestions) * 100;
+        progressBar.style.width = `${progress}%`;
+        progressText.textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+    }
+
+    function startTimer() {
+        const timerElement = document.getElementById('timer');
+        const savedStartTime = sessionStorage.getItem('quizStartTime');
+        const quizDuration = 300; // 5 minutes in seconds
+        let timeLeft = quizDuration;
+        
+        // If timer was already running, calculate remaining time
+        if (savedStartTime) {
+            const elapsed = Math.floor((Date.now() - parseInt(savedStartTime)) / 1000);
+            timeLeft = Math.max(0, quizDuration - elapsed);
+        }
+        
+        // Clear any existing timer
+        if (window.timerInterval) {
+            clearInterval(window.timerInterval);
+        }
+        
+        // Start new timer
+        window.timerInterval = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(window.timerInterval);
+                sessionStorage.removeItem('quizStartTime');
+                alert('Time is up! Submitting your quiz...');
+                document.getElementById('quiz-form').submit();
+            }
+            timeLeft--;
+        }, 1000);
+        
+        // Save timer start time if not already saved
+        if (!savedStartTime) {
+            sessionStorage.setItem('quizStartTime', Date.now());
+        }
+    }
+
+    // Clean up timer when leaving the page
+    window.addEventListener('beforeunload', () => {
+        if (window.timerInterval) {
+            clearInterval(window.timerInterval);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        try {
+            // Verify required elements exist
+            const requiredElements = [
+                '#quiz-form',
+                '.progress',
+                '.progress-text',
+                '#timer',
+                '#prev-btn',
+                '#next-btn',
+                '#submit-btn'
+            ];
+            
+            for (const selector of requiredElements) {
+                if (!document.querySelector(selector)) {
+                    throw new Error(`Required element not found: ${selector}`);
+                }
+            }
+
+            // Initialize current question
+            const savedQuestion = sessionStorage.getItem('currentQuestion');
+            currentQuestion = savedQuestion ? parseInt(savedQuestion) : 1;
+            
+            // Initialize progress elements
+            progressBar = document.querySelector('.progress');
+            progressText = document.querySelector('.progress-text');
+            
+            // Verify at least one question exists
+            if (totalQuestions === 0) {
+                throw new Error('No questions found');
+            }
+            
+            showQuestion(currentQuestion);
+            startTimer();
+            
+            // Add event listeners
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', nextQuestion);
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', prevQuestion);
+            }
+            
+            // Update progress immediately
+            updateProgress();
+        } catch (error) {
+            console.error('Error initializing quiz:', error);
+            alert('An error occurred while initializing the quiz. Please refresh the page.');
+        }
+    });
+</script>
+{% endblock %}

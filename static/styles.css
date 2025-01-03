@@ -1,0 +1,118 @@
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --background-color: #f8fafc;
+    --text-color: #1e293b;
+    --white: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    --card-color-1: #e0f7fa; /* Light Cyan */
+    --card-color-2: #ffe0b2; /* Light Amber */
+    --card-color-3: #f1f8e9; /* Light Green */
+    --card-color-4: #fce4ec; /* Light Pink */
+}
+
+[data-theme="dark"] {
+    --primary-color: #60a5fa;
+    --secondary-color: #3b82f6;
+    --background-color: #1e293b;
+    --text-color: #f8fafc;
+    --white: #1e293b;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Styles */
+.stat-card {
+    background: var(--card-color-1);
+    color: var(--text-color);
+}
+
+/* Additional card styles for different cards */
+.stat-card:nth-child(2) {
+    background: var(--card-color-2);
+}
+
+.stat-card:nth-child(3) {
+    background: var(--card-color-3);
+}
+
+.stat-card:nth-child(4) {
+    background: var(--card-color-4);
+}
+
+/* Form Container Styles */
+.form-container {
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+/* Input Field Styles */
+.form-control {
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Button Styles */
+.btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+}
+
+/* Quiz Result Styles */
+.quiz-results-container {
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.summary-card {
+    padding: 1rem;
+    background: var(--card-color-1);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+/* Table Styles */
+.analysis-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.analysis-table th, .analysis-table td {
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.analysis-table tr:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+/* Additional styles for Add New Question page */
+.question-form {
+    margin-top: 2rem;
+}
+
+.question-form .form-group {
+    margin-bottom: 1.5rem;
+}
