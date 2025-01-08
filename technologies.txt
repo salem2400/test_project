@@ -1,0 +1,34 @@
+Technologies & Packages
+
+Frontend Framework:
+* React.js
+* React Router DOM
+* React Icons
+
+State Management:
+* Context API
+* React Hooks
+
+Authentication & Database:
+* Firebase Authentication
+* Firebase Realtime Database
+* Firebase Storage
+
+Development Tools:
+* npm (Node Package Manager)
+* Git for version control
+
+UI/UX:
+* Modern CSS
+* Responsive Design
+* Custom Components
+
+Helper Libraries:
+* react-router-dom: For navigation
+* react-icons: For UI icons
+* firebase: For backend services
+
+Testing & Security:
+* Private Routes
+* Protected API endpoints
+* User session management 

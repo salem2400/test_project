@@ -1,0 +1,43 @@
+Project Architecture
+
+src/
+* components/: Contains all reusable React components
+  - Flashcard.js: Main flashcard component
+  - PrivateRoute.js: Authentication route wrapper
+  - PublicNavbar.js: Navigation component
+  - Other UI components
+
+* pages/: Contains main application pages
+  - Welcome.js: Landing page
+  - Login.js: User authentication
+  - Register.js: User registration
+  - Profile.js: User profile management
+  - Decks.js: Flashcard decks management
+  - Review.js: Learning review mode
+  - Test.js: Testing mode
+  - Progress.js: Progress tracking
+
+* context/: State management
+  - AuthContext.js: Authentication state
+  - DeckContext.js: Flashcards state
+
+* firebase/: Firebase configuration
+  - config.js: Firebase setup
+  - auth.js: Authentication methods
+  - db.js: Database operations
+
+* styles/: CSS styling files
+  - App.css: Global styles
+  - Component-specific CSS files
+
+* hooks/: Custom React hooks
+  - useAuth.js: Authentication hooks
+  - useDeck.js: Deck management hooks
+
+* services/: API and service functions
+  - firebase-service.js: Firebase operations
+
+Configuration Files:
+* package.json: Project dependencies
+* .gitignore: Git ignore rules
+* README.md: Project documentation 

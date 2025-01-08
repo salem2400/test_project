@@ -1,0 +1,223 @@
+.test-page {
+  padding: 80px 2rem 2rem;
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+}
+
+.test-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.progress {
+  text-align: center;
+  color: #4b5563;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.05),
+    0 6px 6px rgba(0, 0, 0, 0.05),
+    inset 0 -5px 12px rgba(255, 255, 255, 0.7),
+    inset 0 5px 12px rgba(255, 255, 255, 0.7);
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 30px rgba(0, 0, 0, 0.1),
+    0 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card-front {
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.card-back {
+  font-size: 1.8rem;
+  color: #2563eb;
+  margin-bottom: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e5e7eb;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.show-answer-button {
+  background: linear-gradient(145deg, #2563eb, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+  min-width: 200px;
+}
+
+.show-answer-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+}
+
+.answer-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.correct-button,
+.wrong-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.correct-button {
+  background: linear-gradient(145deg, #059669, #047857);
+  color: white;
+  box-shadow: 0 4px 6px rgba(5, 150, 105, 0.2);
+}
+
+.correct-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(5, 150, 105, 0.3);
+}
+
+.wrong-button {
+  background: linear-gradient(145deg, #dc2626, #b91c1c);
+  color: white;
+  box-shadow: 0 4px 6px rgba(220, 38, 38, 0.2);
+}
+
+.wrong-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(220, 38, 38, 0.3);
+}
+
+.test-complete {
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.05),
+    0 6px 6px rgba(0, 0, 0, 0.05);
+  padding: 3rem 2rem;
+}
+
+.test-complete h2 {
+  color: #2563eb;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.score {
+  font-size: 1.4rem;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 15px;
+  font-weight: 500;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  font-size: 1.4rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.error {
+  max-width: 600px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  color: #dc2626;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .test-page {
+    padding: 60px 1rem 1rem;
+  }
+
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .card-front,
+  .card-back {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .show-answer-button {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .answer-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .correct-button,
+  .wrong-button {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .test-complete {
+    margin: 1rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .test-complete h2 {
+    font-size: 1.8rem;
+  }
+
+  .score {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+} 

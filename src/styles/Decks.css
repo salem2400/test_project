@@ -1,0 +1,206 @@
+.decks-page {
+  padding: 2rem;
+  padding-top: 4rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+}
+
+.decks-container {
+  padding: 80px 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.decks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.decks-header h1 {
+  color: #1e293b;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #2563eb, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-deck-button {
+  padding: 1rem 2rem;
+  background: linear-gradient(145deg, #2563eb, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+.add-deck-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+}
+
+.decks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.deck-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.05),
+    0 6px 6px rgba(0, 0, 0, 0.05),
+    inset 0 -5px 12px rgba(255, 255, 255, 0.7),
+    inset 0 5px 12px rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, #2563eb, #3b82f6);
+  border-radius: 20px 20px 0 0;
+}
+
+.deck-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 30px rgba(0, 0, 0, 0.1),
+    0 10px 10px rgba(0, 0, 0, 0.05),
+    inset 0 -5px 12px rgba(255, 255, 255, 0.7),
+    inset 0 5px 12px rgba(255, 255, 255, 0.7);
+}
+
+.deck-card h3 {
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.deck-card p {
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.deck-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.deck-stats span {
+  color: #475569;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deck-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.deck-actions button {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.deck-actions button:first-child {
+  background: linear-gradient(145deg, #2563eb, #1d4ed8);
+  color: white;
+  grid-column: 1 / -1;
+}
+
+.deck-actions button:nth-child(2) {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.deck-actions button:nth-child(3) {
+  background: #059669;
+  color: white;
+}
+
+.deck-actions .delete-button {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.deck-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.deck-actions .delete-button:hover {
+  background: #dc2626;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .decks-container {
+    padding: 80px 1rem 1rem;
+  }
+
+  .decks-header {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .decks-header h1 {
+    font-size: 2rem;
+  }
+
+  .add-deck-button {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .decks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .deck-card {
+    padding: 1.5rem;
+  }
+
+  .deck-actions {
+    grid-template-columns: 1fr;
+  }
+} 

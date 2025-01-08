@@ -1,0 +1,36 @@
+Platform Workflow
+
+User Authentication Flow:
+* Welcome Page -> Login Page -> Register Page
+* User not authenticated -> Home Page (limited access)
+* User authenticated -> Full Platform Access
+
+Main Features Flow:
+* Decks Management:
+  - View all flashcard decks
+  - Create new deck
+  - Edit existing decks
+  - Delete decks
+
+* Learning Flow:
+  - Select deck
+  - Review mode: Interactive flashcard flipping
+  - Test mode: Self-assessment
+  - Progress tracking: View learning statistics
+
+* User Profile:
+  - Personal information
+  - Learning history
+  - Progress overview
+  - Achievement tracking
+
+Navigation Flow:
+* Authenticated users can access:
+  - Profile page
+  - Decks management
+  - Review sessions
+  - Test mode
+  - Progress tracking
+* Non-authenticated users can only view:
+  - Welcome page
+  - Login/Register options 

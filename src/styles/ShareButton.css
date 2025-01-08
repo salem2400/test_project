@@ -1,0 +1,36 @@
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.share-button:hover {
+  background-color: #357abd;
+}
+
+.share-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.share-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* تحسينات للأجهزة المحمولة */
+@media (max-width: 768px) {
+  .share-button {
+    width: 100%;
+    justify-content: center;
+  }
+} 

@@ -1,0 +1,5 @@
+I'm Amira Farag
+
+Front-end developer
+
+This project is a solo endeavor. I built the front-end using React.js and modern CSS, while implementing the back-end with Firebase for authentication and data management. 
